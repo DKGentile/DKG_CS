@@ -1,0 +1,24 @@
+#include<windows.h>
+#include<iostream>
+#include "MyGraphics.h"
+
+using namespace std;
+
+#define PI 3.14
+
+int main()
+{
+    MyGraphics M;
+    M.SetColor(255, 255, 0);
+
+    int x = 0;
+    //Draw pixels
+    for (double i = 0; i < PI * 8; i += 0.05)
+    {
+        M.DrawPixel(x, (int)(50 + 25 * cos(i)));
+        x += 1;
+    }
+
+    cin.ignore();
+    return 0;
+}

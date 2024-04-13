@@ -1,0 +1,75 @@
+ MyMouse M;
+
+    while (1)
+    {
+
+        M.ReadMouseInput();
+
+        switch (M.InputRecord.EventType) {        
+        case MOUSE_EVENT: // mouse input 
+            if (M.InputRecord.Event.MouseEvent.dwButtonState == FROM_LEFT_2ND_BUTTON_PRESSED)
+            {
+                M.coord.X = M.InputRecord.Event.MouseEvent.dwMousePosition.X;
+                M.coord.Y = M.InputRecord.Event.MouseEvent.dwMousePosition.Y;
+                SetConsoleCursorPosition(M.hout, M.coord);
+                SetConsoleTextAttribute(M.hout, rand() % 7 + 9);
+                M.drawcircle(M.coord.X, M.coord.Y, 10, 10, 14);
+            }
+            else if (M.InputRecord.Event.MouseEvent.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED)
+            {
+                M.coord.X = M.InputRecord.Event.MouseEvent.dwMousePosition.X;
+                M.coord.Y = M.InputRecord.Event.MouseEvent.dwMousePosition.Y;
+                SetConsoleCursorPosition(M.hout, M.coord);
+                SetConsoleTextAttribute(M.hout, rand() % 7 + 9);
+
+                if ((M.InputRecord.Event.MouseEvent.dwMousePosition.X == M.buttonX) &&
+                    (M.InputRecord.Event.MouseEvent.dwMousePosition.Y == M.buttonY)) {
+
+                    system("cls");
+
+                    cout << "You pressed a button";
+
+
+                }
+
+                cout << "Hello world at " << M.InputRecord.Event.MouseEvent.dwMousePosition.X << " x " << M.InputRecord.Event.MouseEvent.dwMousePosition.Y << " ";
+
+            }
+            else if (M.InputRecord.Event.MouseEvent.dwButtonState == RIGHTMOST_BUTTON_PRESSED)
+            {
+                M.coord.X = M.InputRecord.Event.MouseEvent.dwMousePosition.X;
+                M.coord.Y = M.InputRecord.Event.MouseEvent.dwMousePosition.Y;
+                SetConsoleCursorPosition(M.hout, M.coord);
+                SetConsoleTextAttribute(M.hout, rand() % 7 + 9);
+
+                if ((M.InputRecord.Event.MouseEvent.dwMousePosition.X == M.buttonX) &&
+                    (M.InputRecord.Event.MouseEvent.dwMousePosition.Y == M.buttonY)) {
+
+                    system("cls");
+
+                    cout << "You pressed a button";
+
+
+                }
+
+                cout << "Hello world at " << M.InputRecord.Event.MouseEvent.dwMousePosition.X << " x " << M.InputRecord.Event.MouseEvent.dwMousePosition.Y << " ";
+
+            }// mouse 
+
+            break;
+
+        case WINDOW_BUFFER_SIZE_EVENT: // scrn buf. resizing 
+            ;
+            break;
+
+        case FOCUS_EVENT:  // disregard focus events 
+
+        case MENU_EVENT:   // disregard menu events 
+
+            break;
+
+        default:
+            cout << "Unknown event type \n";
+            break;
+        }
+    }
