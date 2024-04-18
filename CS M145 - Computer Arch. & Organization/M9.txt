@@ -1,0 +1,181 @@
+;nasm 2.13.02
+
+section .data
+    noloc:     db ':',10 
+    rats:     db '*',10 
+    nLine: db 0xA, 0xD
+    nLL: equ $-nLine
+
+section .bss
+    var1: resb 1 ;used to store value of first variable
+    var2: resb 1 ;used to store value of second variable
+    var3: resb 1 ;used to store value of third variable
+    hee: resb 1 ;used to store value of recently read value
+    c1: resb 1 ;used to count the amount of var1's
+    c2: resb 1 ;used to count the amount of var2's
+    c3: resb 1 ;used to count the amount og var3's
+    k: resb 1 ;used to store counter values during alteration of registries
+    cer: resb 1 ;used to count
+
+section .text
+	global _start
+
+_start:
+    ;zeroeing out counter variables
+    mov [cer],byte 0
+    mov [c1],byte 0
+    mov [c2],byte 0
+    mov [c3],byte 0
+    Call readvar ;reading initial 3 variables
+    call count ;counting the amount of variables
+    jmp end ;ending program
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+readvar:
+    ;reading into var1
+    mov eax,3
+    mov ebx,0
+    mov ecx,var1
+    mov edx,1
+    int 80h
+    
+    ;reading into var2
+    mov eax,3
+    mov ebx,0
+    mov ecx,var2
+    mov edx,1
+    int 80h
+    
+    ;reading into var3
+    mov eax,3
+    mov ebx,0
+    mov ecx,var3
+    mov edx,1
+    int 80h 
+    
+ret
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+count:
+    ;reading value to be counted    
+    mov eax,3
+    mov ebx,0
+    mov ecx,hee
+    mov edx,1
+    int 80h
+    
+    ;if we read a '.', start printing
+    cmp [hee],byte '.'
+    je print
+    
+    ;comparing recently read vlaue with stored values
+    mov al,[hee]
+    cmp al,[var1]
+    je ploosv1
+    cmp al,[var2]
+    je ploosv2
+    cmp al,[var3]
+    je ploosv3
+    
+    jmp count ;if we do not enounter a valid value, or a period, repeat
+    
+
+ret
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+print:
+    
+    
+    mov ecx,var1 ;moving var into ecx
+    call tnirp ;calling a displauy/print function (sorry for the bad names)    
+    call colon ;calling to print a colon. saves time and had issues with directly printing ':'
+    mov al,[c1] ;storing c1 in al so it can be passed into pv1
+    call pv1 ;function will call upon and print star as nessesary
+    call newline ;function will print a new line
+    mov [cer],byte 0 ;resetting/zeroeing out my counter variable
+    
+    ;the rest of the function is the same thing
+    
+    mov ecx,var2
+    call tnirp    
+    call colon
+    mov al,[c2]
+    call pv1
+    call newline
+    mov [cer],byte 0 
+    
+    mov ecx,var3
+    call tnirp    
+    call colon
+    mov al,[c3]
+    call pv1
+    call newline
+    mov [cer],byte 0
+    
+ret
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+pv1:    
+    cmp al,byte 0 ;comparing al to 0
+    jg star ;if greater than 0, jump to star function
+ret
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+tnirp:
+
+    ;just a simply print function, storing a value in eax beforehand
+    mov eax,4
+    mov ebx,1
+    mov edx,1
+    int 80h
+
+ret
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+colon:
+    ;simply printing a colon
+    mov eax,4
+    mov ebx,1
+    mov ecx,noloc
+    mov edx,1
+    int 80h
+ret
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+star:   
+    mov [k],al ;storing passed value in k
+    
+    ;simply printing a star
+    mov eax,4
+    mov ebx,1
+    mov ecx,rats
+    mov edx,1
+    int 80h
+    
+    add [cer],byte 1 ;incrementing counter
+    mov al,[k] ;moving passed value back into registry (may be unnessisary)
+    cmp [cer],al ;comparing counter with passed value
+    jl star ;if we do not have enough (i.e less), repeat the function
+    
+ret
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+ploosv1:
+    ;the 'ploosvX' functions just count the amount of times that value is encountered
+    add [c1],byte 1
+    jmp count
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ploosv2:
+    add [c2],byte 1
+    jmp count
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ploosv3:
+    add [c3],byte 1
+    jmp count
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+newline:
+    ;simply printing a new line
+    mov eax,4
+    mov ebx,1
+    mov ecx,nLine
+    mov edx,nLL
+    int 80h
+ret
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+end:
+    ;ending the function
+    mov eax,1
+    mov ebx,0
+    int 80h

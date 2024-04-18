@@ -1,0 +1,74 @@
+html {
+    border-left: 10px solid red;
+    border-right: 10px solid red;  
+    border-bottom: 10px solid red;
+    border-top: 10px solid red;
+    height: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    background-color: lightskyblue;
+}
+body {
+    
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    text-align: center;
+}
+p {
+    text-align: center;
+}
+h2 {
+    text-align: center;
+}
+table, th, td{
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: black;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+table {
+    margin: 0 auto;
+}
+th, td {
+    background-color: whitesmoke;
+}
+thead {
+    text-align: center;
+}
+tr {
+    text-align: center;
+}
+td {
+    text-align: center;
+}
+tbody {
+    text-align: center;
+}
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    border: 10px solid orangered;
+    background-color: beige;
+}
+.mydiv {
+    display: flex;
+    flex-direction: row;
+}
+  
+.mydiv > * {
+    float: left;
+    margin-right: 10px;
+}
+.a {
+    font-size: small;
+    width: 200px;
+    height: 200px;
+    max-width: 100%;
+    border: 1px solid black;
+    box-sizing: border-box;
+}

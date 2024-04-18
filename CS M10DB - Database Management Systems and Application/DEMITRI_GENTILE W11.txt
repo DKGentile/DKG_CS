@@ -1,0 +1,38 @@
+6.10)
+
+1) SELECT Fname FROM EMPLOYEE WHERE Ssn = 
+	(SELECT Essn FROM WORKS_ON WHERE Hours > 10)
+	AND Dno = 5;
+
+2) SELECT Fname FROM EMPLOYEE WHERE Ssn =
+	(SELECT Essn FROM DEPENDENT WHERE Dependent_name =
+		(SELECT Fname FROM EMPLOYEE));
+
+3) SELECT Fname FROM EMPLOYEE WHERE Super_ssn = 
+	(SELECT Ssn FROM EMPLOYEE WHERE Fname = 'Franklin' AND Lname = 'Wong');
+===================================================================================
+6.12)
+
+1) SELECT Name FROM STUDENT WHERE Major = 'CS' AND Class = 4;
+
+2) SELECT Course_name FROM COURSE WHERE Course_number =
+	(SELECT Course_number FROM SECTION WHERE Instructor = 'King');
+
+3) SELECT Course_number, Semester, Year FROM Section WHERE Instructor = 'King';
+
+4) SELECT Name FROM STUDENT 
+	LEFT JOIN GRADE_REPORT 
+	ON STUDENT.Student_number = GRADE_REPORT.Student_number
+	LEFT JOIN SECTION
+	ON GRADE_REPORT.Section_Identifier = SECTION.Section_Identifier;
+===================================================================================
+6.13) 
+
+1) INSERT INTO Student VALUES (‘Johnson’, 25, 1, ‘Math’);
+
+2) UPDATE STUDENT SET Class = 2 WHERE Name = 'Smith';
+
+3) INSERT INTO COURSE VALUES (‘Knowledge Engineering’, ‘cs4390’, 3, ‘cs’);
+
+4) DELETE FROM GRADE_REPORT WHERE Student_number = 17;
+   DELETE FROM STUDENT WHERE Student_number = 17;

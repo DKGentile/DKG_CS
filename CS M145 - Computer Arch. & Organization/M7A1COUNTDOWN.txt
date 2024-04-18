@@ -1,0 +1,33 @@
+;nasm 2.13.02
+
+section .data
+
+section .bss
+
+    fra: resb 1
+    
+section .text
+
+    global _start
+
+_start:
+
+    mov [fra], byte '9'
+
+print:
+
+    mov eax,4
+    mov ebx,1
+    mov ecx,fra      
+    mov edx,1                              
+    int 80h              
+    
+    sub [fra], byte 1
+    cmp [fra] , byte 47
+    jz end;
+    jmp print
+    
+end:    
+    mov eax,1            
+    mov ebx,0            
+    int 80h;

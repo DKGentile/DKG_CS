@@ -1,0 +1,15 @@
+CREATE VIEW stud_gpa AS
+SELECT Student_number, AVG(
+	CASE
+        WHEN Grade = 'A' THEN 4.0
+        WHEN Grade = 'B' THEN 3.0
+        WHEN Grade = 'C' THEN 2.0
+        WHEN Grade = 'D' THEN 1.0
+        ELSE 0.0
+    	END) 
+AS GPA FROM GRADE_REPORT GROUP BY Student_number;
+
+SELECT s.NAME, g.GPA
+FROM STUDENT s
+JOIN stud_gpa g
+ON s.Student_number = g.Student_number;

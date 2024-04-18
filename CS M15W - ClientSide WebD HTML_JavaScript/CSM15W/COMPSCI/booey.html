@@ -1,0 +1,54 @@
+<html>
+<script>
+let imz = new Array();
+imz[0] = "R.jpg";
+imz[1] = "OIP.jpg";
+imz[2] = "wGg7nP.jpg";
+let voz = new Array();
+voz[0] = "This is forty-fifth president of the united states of america, Donald Trump. Though he lost the 2020 election, he is running a contentious campaign for the presidency in 2024.";
+voz[1] = "Space clouds, also known as interstellar clouds or nebulae, are vast, diffuse regions of gas and dust that exist in outer space.";
+voz[2] = "This is a small city in Norway. Norway has beautiful landscapes with great mountains. The food is also very unique."
+function snop(a) {
+    document.getElementById("mainn").src = imz[a];
+    const speech = new SpeechSynthesisUtterance();
+    speech.text = voz[a];
+    speechSynthesis.speak(speech);
+}
+</script>
+<center>
+    <h1>
+        <div style="background-color: white;">DEMITRI GENTILE</div>
+    </h1>
+    <img src="R.jpg" width="250" height="250" id = "mainn">
+</center>
+<br><br>
+<div style="display: flex; justify-content: space-around;">
+    <div style="display: inline-block;">
+        <img src="R.jpg" width="250" height="250" onclick="snop(0)">
+    </div>
+    <div style="display: inline-block;">
+        <img src="OIP.jpg" width="250" height="250" onclick="snop(1)">
+    </div>
+    <div style="display: inline-block;">
+        <img src="wGg7nP.jpg" width="250" height="250" onclick="snop(2)">
+    </div>
+</div>
+<br><br>
+<center>
+    <h3>Favorite Websites</h3>
+</center>
+<center>
+    <p><a href="https://www.google.com">Google</a>&emsp;
+        <a href="https://www.bing.com">Bing</a>&emsp;
+        <a href="https://www.youtube.com">Youtube</a>
+    </p>
+</center>
+<center>
+    <h4>
+        <div style="background-color: orange;">
+            <i>"We have nothing to fear but fear itself"</i><b>-President Roosevelt</b>
+        </div>
+    </h4>
+</center>
+
+</html>

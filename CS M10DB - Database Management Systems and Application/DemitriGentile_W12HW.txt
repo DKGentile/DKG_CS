@@ -1,0 +1,58 @@
+============================================================================================
+[7.8]
+
+1) CREATE VIEW Manager_Sum AS
+	SELECT Concat(EMPLOYEE.Fname, ' ', EMPLOYEE.Lname) AS Name, 
+		DEPARTMENT.Dname, EMPLOYEE.Salary
+	FROM EMPLOYEE
+		LEFT JOIN DEPARTMENT ON DEPARTMENT.Mgr_ssn = EMPLOYEE.Ssn
+	ORDER BY Salary DESC;
+-----------------------------------------------------------------------------
+2)
+CREATE VIEW Super AS SELECT Concat(Fname, ' ', Lname), Ssn AS Sname FROM EMPLOYEE 
+	             WHERE Ssn = (SELECT Super_ssn FROM EMPLOYEE);  
+
+	
+CREATE VIEW Emp_odr AS
+	SELECT Concat(EMPLOYEE.Fname, ' ', EMPLOYEE.Lname) AS Name,
+	       Super.Sname, EMPLOYEE.Salary
+	FROM EMPLOYEE
+		LEFT JOIN Super ON Super.Ssn = EMPLOYEE.Super_ssn;
+-----------------------------------------------------------------------------
+3) CREATE VIEW Pject AS
+	SELECT PROJECT.Pname, DEPARTMENT.Dname
+	FROM PROJECT
+		LEFT JOIN DEPARTMENT ON DEPARTMENT.num = PROJECT.Dnum;
+-----------------------------------------------------------------------------
+4) CREATE VIEW Pject AS
+	SELECT PROJECT.Pname, DEPARTMENT.Dname
+	FROM PROJECT
+		LEFT JOIN DEPARTMENT ON DEPARTMENT.num = PROJECT.Dnum;
+============================================================================================
+[7.9]
+
+A) 1,4,5 would all work.
+
+B) [unsure what question is asking. If you are requesting I write queries with the given
+    JOIN methods, please let me know and I will re-do question.]
+	B1) All collumns that are present in both Orders and Employees.
+	B2) All columns from Orders and all columns from Employees that are present in Orders.
+	B3) All columns from Employees and all columns from Orders that are present in Employees
+	B4) All columns from both tables.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,10 @@
+SELECT DISTINCT CategoryID FROM Products;
+SELECT * FROM Products ORDER BY ProductName ASC, UnitPrice DESC;
+SELECT UnitPrice FROM Products WHERE UnitPrice IS NOT NULL;
+
+SELECT CategoryID, MIN(UnitPrice), MAX(UnitPrice), COUNT(ProductID) 
+FROM Products WHERE UnitPrice IS NOT NULL AND ProductID IS NOT NULL
+GROUP BY CategoryID;
+
+SELECT CompanyName FROM Customers WHERE PATINDEX('%c_x%', CompanyName) > 0;
+SELECT CompanyName FROM Customers WHERE PATINDEX('%c__i%',CompanyName) > 0;

@@ -1,0 +1,17 @@
+#include <iostream>
+#include <windows.h>
+#include <stdio.h>
+#include "Colors.h"
+
+using namespace std;
+
+
+int main(void)
+{
+	Colors c;
+	system("cls");
+	c.SetColor(15, 15);
+	cout << "XXXXX" << endl;
+
+	return 1;
+}

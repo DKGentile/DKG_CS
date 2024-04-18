@@ -1,0 +1,54 @@
+;nasm 2.13.02
+
+section .data
+    message:     db 'Even',10
+    messageLen:  equ $-message
+    nope:        db 'Odd',10
+    nopeLen:     equ $-nope
+
+section .bss
+    var: resb 1
+    var1: resb 1
+
+section .text
+	global _start
+
+_start:
+
+        mov eax,3
+	mov ebx,0
+	mov ecx,var
+	mov edx,1
+	int 80h 
+
+;compare of I have 5
+
+        mov ax,[var]
+        sub ax,'0'
+        mov bl,2
+        div bl   
+    
+        cmp ah,1
+        je end
+
+	mov eax,4
+	mov ebx,1
+	mov ecx,message
+	mov edx,messageLen
+	int 80h 
+
+        mov eax,1
+	mov ebx,0
+	int 80h;
+            
+end:
+        
+        mov eax,4
+	mov ebx,1
+	mov ecx,nope
+	mov edx,nopeLen
+	int 80h         
+
+	mov eax,1
+	mov ebx,0
+	int 80h;

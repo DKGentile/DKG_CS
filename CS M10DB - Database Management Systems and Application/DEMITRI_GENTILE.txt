@@ -1,0 +1,6 @@
+UPDATE Products SET UnitPrice = 25.75 WHERE ProductID = 44;
+DELETE FROM Products WHERE UnitPrice = NULL; --no values in table are NULL
+SELECT COUNT(UnitPrice) FROM Products WHERE UnitPrice > 50;
+SELECT * FROM Products WHERE UnitPrice = (SELECT MIN(UnitPrice) FROM Products);
+UPDATE Products SET UnitPrice = UnitPrice*0.1 WHERE SupplierID = (SELECT SupplierID FROM Suppliers WHERE City = 'Toronto'); --no suppliers from Toronto
+DELETE FROM Customers WHERE CustomerID NOT IN (SELECT CustomerID FROM Orders WHERE OrderDate > '1998-01-01');

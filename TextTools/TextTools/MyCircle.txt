@@ -1,0 +1,6 @@
+// Example on how to use this class.
+//MyCircle C;
+//C.m_x = 30;
+//C.m_y = 20;
+//C.m_radius = 5;
+//C.DrawCircle();

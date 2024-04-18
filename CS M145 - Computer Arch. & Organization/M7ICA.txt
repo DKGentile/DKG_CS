@@ -1,0 +1,49 @@
+;nasm 2.13.02
+section .data
+
+section .bss
+    var: resb 1
+    var1: resb 1
+section .text
+    global _start
+_start:
+
+read:
+    mov eax,3
+    mov ebx,0
+    mov ecx,var
+    mov edx,1
+    int 80h
+    
+    cmp [var],byte 90
+    jl mmize
+    jg CAP
+    cmp [var],byte '.'
+    je end
+    
+CAP:
+    sub [var],byte 32
+    jmp write
+
+mmize:
+    cmp [var],byte '.'
+    je end
+    cmp [var],byte 65
+    jl numb
+    add [var],byte 32
+    jmp write
+numb:
+    jmp write
+    cmp [var],byte '.'
+    je end
+write:
+    mov eax,4
+    mov ebx,1
+    mov ecx,var
+    mov edx,1
+    int 80h
+    jmp read
+end:
+    mov eax,1
+    mov ebx,0
+    int 80h

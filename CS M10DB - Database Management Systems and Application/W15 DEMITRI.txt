@@ -1,0 +1,24 @@
+A)
+
+CREATE TRIGGER check_price_update
+BEFORE UPDATE ON PC
+FOR EACH ROW
+BEGIN
+    DECLARE min_price DECIMAL(10,2);
+    SELECT MIN(price) INTO min_price FROM PC WHERE speed = NEW.speed;
+    IF NEW.price < min_price THEN
+        SET NEW.price = OLD.price;        
+    END IF;
+END;
+
+===========================================================================
+
+B)
+
+CREATE TRIGGER check_printer_insert
+BEFORE INSERT ON Printer
+FOR EACH ROW
+BEGIN
+    DECLARE prod_model CHAR(10);
+    SELECT model INTO prod_model FROM Product WHERE model = NEW.model;
+END;

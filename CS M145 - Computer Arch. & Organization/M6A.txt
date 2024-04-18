@@ -1,0 +1,146 @@
+;nasm 2.13.02
+
+section .data
+    message:     db 'The Result is Negative!',10 
+    messageLen:  equ $-message
+    invaliidi:     db 'INVALID INPUT'
+    invaliidaLen:  equ $-invaliidi
+    abc:         db '-',10
+    acb:         db '+',10
+    bac:         db '*',10
+    bca:         db '/',10
+
+section .bss
+    num1: resb 1
+    num2: resb 1
+    per: resb 1
+
+section .text
+    global _start
+
+_start:
+
+    mov eax,3          
+    mov ebx,0 
+    mov ecx,num1     
+    mov edx,1                        
+    int 80h    
+
+    mov eax,3          
+    mov ebx,0 
+    mov ecx,per
+    mov edx,1                        
+    int 80h
+    
+    mov eax,3          
+    mov ebx,0 
+    mov ecx,num2
+    mov edx,1                        
+    int 80h
+    
+    mov al,[per]
+    cmp al,[abc]
+    je subtract
+    cmp al,[acb]
+    je addition
+    cmp al,[bac]
+    je multiply
+    cmp al,[bca]
+    je divide
+    jmp invaliida
+    
+subtract:
+    mov al,[num1];
+    mov bl,[num2];
+    sub al,'0'
+    sub bl,'0'
+    cmp al,bl
+    jl itsnegative
+    sub al,bl
+    mov [num1],al
+    add byte [num1],'0'
+    
+    mov eax,4           
+    mov ebx,1 
+    mov ecx,num1    
+    mov edx,1                        
+    int 80h
+    
+    jmp end
+
+addition:
+
+    mov al,[num1];
+    mov bl,[num2];
+    sub al,'0'
+    sub bl,'0'   
+    add al,bl
+    mov [num1],al
+    add byte [num1],'0'
+    
+    mov eax,4           
+    mov ebx,1 
+    mov ecx,num1    
+    mov edx,1                        
+    int 80h
+    
+    jmp end
+
+multiply:
+
+    mov al,[num1];
+    mov bl,[num2];
+    sub al,'0'
+    sub bl,'0'   
+    mul bl
+    mov [num1],al
+    add byte [num1],'0'
+    
+    mov eax,4           
+    mov ebx,1 
+    mov ecx,num1    
+    mov edx,1                        
+    int 80h
+    
+    jmp end
+
+divide:
+    
+    mov al,[num1];
+    mov bl,[num2];
+    sub al,'0'
+    sub bl,'0'   
+    div bl
+    mov [num1],al
+    add byte [num1],'0'
+    
+    mov eax,4           
+    mov ebx,1 
+    mov ecx,num1    
+    mov edx,1                        
+    int 80h
+    
+    jmp end
+
+itsnegative:
+
+    mov eax,4           
+    mov ebx,1 
+    mov ecx,message     
+    mov edx,messageLen                        
+    int 80h
+    jmp end
+    
+invaliida:
+
+    mov eax,4           
+    mov ebx,1 
+    mov ecx,invaliidi     
+    mov edx,invaliidaLen                        
+    int 80h 
+    
+
+end:
+    mov eax,1         
+    mov ebx,0         
+    int 80h;

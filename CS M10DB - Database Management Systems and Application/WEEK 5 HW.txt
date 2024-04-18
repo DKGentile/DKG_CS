@@ -1,0 +1,15 @@
+3.24) Assuming that phone numbers are assigned to departments, 
+HAS_PHONE would be redundant in the EMPLOYEE table if their
+respective phone numbers were displayed for every DEPARTMENT 
+each EMPLOYEE is assigned to.
+
+One EMPLOYEE can be assigned to many DEPARTMENTs, and each DEPARTMENT
+can be assigned many EMPLOYEEs
+ 
+3.25) COURSE can have no TEXT, but a TEXT must be assigned to a course.
+An INSTRUCTOR can have no course, but a COURSE must have and INSTRUCTOR.
+
+We only need a relationship between INSTRUCTOR and COURSE. There is no need
+to link INSTRUCTOR and TEXT because TEXT is dependant on COURSE, so every TEXT
+assigned to a COURSE would automatically correlate with the INSTRUCTOR assigned 
+to COURSE.

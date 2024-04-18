@@ -1,0 +1,67 @@
+;nasm 2.13.02
+
+section .data
+    message:     db 'First number is bigger!',10
+    messageLen:  equ $-message
+    nope:        db 'Second number is bigger!',10
+    nopeLen:     equ $-nope
+    equal:       db 'Equal!',10
+    equalLen:    equ $-equal
+
+section .bss
+    var: resb 1
+    var1: resb 1
+
+section .text
+	global _start
+
+_start:
+
+        mov eax,3
+	mov ebx,0
+	mov ecx,var
+	mov edx,1
+	int 80h 
+
+        mov eax,3
+	mov ebx,0
+	mov ecx,var1
+	mov edx,1
+	int 80h 
+
+        mov al,[var]
+        mov bl,[var1]   
+    
+        cmp al,bl
+        jl less
+        je eqw
+
+	mov eax,4
+	mov ebx,1
+	mov ecx,message
+	mov edx,messageLen
+	int 80h 
+        jmp end
+            
+less:
+        
+        mov eax,4
+	mov ebx,1
+	mov ecx,nope
+	mov edx,nopeLen
+	int 80h
+        jmp end        
+
+eqw:
+
+        mov eax,4
+	mov ebx,1
+	mov ecx,equal
+	mov edx,equalLen
+	int 80h
+        jmp end  
+
+end:
+	mov eax,1
+	mov ebx,0
+	int 80h;

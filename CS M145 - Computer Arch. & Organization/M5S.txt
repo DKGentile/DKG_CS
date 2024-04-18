@@ -1,0 +1,63 @@
+;nasm 2.13.02
+
+section .data
+ 
+section .bss
+    num: resb 1
+    num2: resb 1
+    r: resb 3
+
+
+section .text
+    global _start
+
+_start:
+    
+    mov eax,3
+    mov ebx,0
+    mov ecx,num 
+    mov edx,1                    
+    int 80h
+    
+    mov eax,3
+    mov ebx,0
+    mov ecx,r
+    mov edx,3                    
+    int 80h
+    
+    mov eax,3
+    mov ebx,0
+    mov ecx,num2
+    mov edx,1                    
+    int 80h
+           
+    sub [num],byte '0'
+    sub [num2],byte '0'
+    mov al,[num]
+    mov bl,100
+    mul bl
+    sub al,[num2]
+    mov bl,10
+    div bl
+    mov [num],al
+    mov [num2],ah
+    add [num],byte '0'
+    add [num2],byte '0'
+    
+    mov eax,4
+    mov ebx,1
+    mov ecx,num 
+    mov edx,1                    
+    int 80h
+    
+    mov eax,4
+    mov ebx,1
+    mov ecx,num2
+    mov edx,1                    
+    int 80h
+    
+    
+    mov eax,1       
+    mov ebx,0       
+    int 80h;
+    

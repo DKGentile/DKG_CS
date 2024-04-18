@@ -1,0 +1,9 @@
+CREATE FUNCTION bababooey (@loan int, @term int, @rate float)
+RETURNS int
+AS BEGIN
+	SET @rate = @rate/1200
+	SET @term = @term*12
+	DECLARE @monthleyPayment float
+	SET @monthleyPayment = (@loan * @rate) / (@term/(@rate + 1))
+	RETURN @monthleyPayment
+END

@@ -1,0 +1,180 @@
+;nasm 2.13.02
+
+section .data
+    ysn: db 'Your street number is: '
+    ysnLen:  equ $-ysn
+    
+    ysa: db 'Your street name is: '
+    ysaLen: equ $-ysa
+    
+    ycn: db 'Your City is: '
+    ycnLen: equ $-ycn
+    
+    ysi: db 'Your State is: '
+    ysiLen: equ $-ysi
+    
+    yzc: db 'Your Zipcode is: '
+    yzcLen: equ $-yzc
+    
+section .bss
+    state: resb 2
+    street: resb 10
+    streetN: resb 10
+    city: resb 11
+    zip: resb 5
+    space: resb 1
+    nLine: resb 2
+
+section .text
+	global _start
+
+_start:
+;street number read
+	mov eax,3        
+	mov ebx,0      
+	mov ecx,street
+	mov edx,4
+	int 80h
+;space
+    mov eax,3         
+	mov ebx,0      
+	mov ecx,space 
+	mov edx,1
+	int 80h
+;street name read
+    mov eax,3        
+	mov ebx,0        
+	mov ecx,streetN
+	mov edx,10
+	int 80h
+
+;nLine read
+    mov eax,3         
+	mov ebx,0      
+	mov ecx,nLine 
+	mov edx,2
+	int 80h
+;City Read
+    mov eax,3        
+	mov ebx,0        
+	mov ecx,city  
+	mov edx,11
+	int 80h
+;space
+    mov eax,3         
+	mov ebx,0      
+	mov ecx,space 
+	mov edx,1
+	int 80h
+;space
+    mov eax,3         
+	mov ebx,0      
+	mov ecx,space 
+	mov edx,1
+	int 80h
+;State Read
+    mov eax,3   
+	mov ebx,0       
+	mov ecx,state
+	mov edx,2
+	int 80h
+;space
+    mov eax,3         
+	mov ebx,0      
+	mov ecx,space 
+	mov edx,1
+	int 80h
+;zip read
+    mov eax,3      
+	mov ebx,0        
+	mov ecx,zip   
+	mov edx,5
+	int 80h
+;print ysn
+    mov eax,4     
+	mov ebx,1       
+	mov ecx,ysn
+	mov edx,ysnLen
+	int 80h
+;print street number
+    mov eax,4   
+	mov ebx,1      
+	mov ecx,street
+	mov edx,4
+	int 80h
+;nLine
+    mov eax,4         
+	mov ebx,1      
+	mov ecx,nLine 
+	mov edx,2
+	int 80h
+;print ysa
+    mov eax,4     
+	mov ebx,1       
+	mov ecx,ysa
+	mov edx,ysaLen
+	int 80h
+;print street name
+    mov eax,4   
+	mov ebx,1      
+	mov ecx,streetN
+	mov edx,10
+	int 80h
+;nLine
+    mov eax,4        
+	mov ebx,1      
+	mov ecx,nLine 
+	mov edx,2
+	int 80h
+;print ycn
+    mov eax,4     
+	mov ebx,1       
+	mov ecx,ycn
+	mov edx,ycnLen
+	int 80h
+;print city name
+    mov eax,4    
+	mov ebx,1       
+	mov ecx,city
+	mov edx,11
+	int 80h
+;nLine
+    mov eax,4         
+	mov ebx,1      
+	mov ecx,nLine 
+	mov edx,2
+	int 80h
+;print ysi
+    mov eax,4     
+	mov ebx,1       
+	mov ecx,ysi
+	mov edx,ysiLen
+	int 80h
+;print state
+    mov eax,4    
+	mov ebx,1       
+	mov ecx,state
+	mov edx,2
+	int 80h
+;nLine
+    mov eax,4         
+	mov ebx,1      
+	mov ecx,nLine 
+	mov edx,2
+	int 80h
+;print yzc
+    mov eax,4     
+	mov ebx,1       
+	mov ecx,yzc
+	mov edx,yzcLen
+	int 80h
+;print zipcode
+    mov eax,4    
+	mov ebx,1       
+	mov ecx,zip
+	mov edx,5
+	int 80h
+    
+    mov eax,1            
+	mov ebx,0            
+	int 80h;

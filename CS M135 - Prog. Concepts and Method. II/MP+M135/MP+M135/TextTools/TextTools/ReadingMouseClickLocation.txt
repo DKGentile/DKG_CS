@@ -1,0 +1,55 @@
+#include <iostream>
+#include <string>
+#include "MyMouse.h"
+
+using namespace std;
+
+void main()
+{
+    MyMouse M;
+
+    M.gotoxy(10,10);
+    M.setForeGroundAndBackGroundColor(10, 15);
+    cout << char(219);
+    M.gotoxy(13, 10);
+    M.setForeGroundAndBackGroundColor(11, 15);
+    cout << char(219);
+    M.gotoxy(16, 10);
+    M.setForeGroundAndBackGroundColor(12, 15);
+	cout << char(219);
+
+
+    while (1)
+    {
+
+        M.ReadMouseInput();
+        switch (M.InputRecord.EventType) 
+        {
+        case MOUSE_EVENT: // mouse input 
+            if (M.InputRecord.Event.MouseEvent.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED)
+            {
+                M.coord.X = M.InputRecord.Event.MouseEvent.dwMousePosition.X;
+                M.coord.Y = M.InputRecord.Event.MouseEvent.dwMousePosition.Y;
+                if (M.coord.X == 10 && M.coord.Y == 10)
+                {
+                    M.gotoxy(20, 20);
+                    M.setForeGroundAndBackGroundColor(10, 15);
+                    cout << "Brush color is 10";
+                }
+                else if (M.coord.X == 13 && M.coord.Y == 10)
+                {
+                    M.gotoxy(20, 20);
+                    M.setForeGroundAndBackGroundColor(11, 15);
+                    cout << "Brush color is 11";
+                }
+                else if (M.coord.X == 16 && M.coord.Y == 10)
+                {
+                    M.gotoxy(20, 20);
+                    M.setForeGroundAndBackGroundColor(12, 15);
+                    cout << "Brush color is 12";
+                }
+            }
+            break;   
+        }  
+    }
+}

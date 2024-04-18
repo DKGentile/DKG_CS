@@ -1,0 +1,38 @@
+
+1) Create and populate the tables in the following order:
+	Course; Section; Student; Grade_Report; Prerequisite
+
+==================================================================
+2) SQL Commands to create desired table:
+
+CREATE TABLE COURSE (
+	C_NAME varchar(50),
+	C_NUM varchar(50),
+	CREDITS int,
+	DEPT varchar(10),
+	PRIMARY KEY(C_NUM)
+);
+CREATE TABLE SECTION (
+	SEC_ID int,
+	C_NUM varchar(50) FOREIGN KEY REFERENCES COURSE(C_NUM),
+	SEMEST varchar(10),
+	YR char(2),
+	INSTRUCTOR varchar(25),
+	PRIMARY KEY(SEC_ID)
+);
+CREATE TABLE STUDENT (
+	LNAME varchar(25),
+	STUD_ID int,
+	CLASS int,
+	MAJOR char(2),
+	PRIMARY KEY(STUD_ID)
+);
+CREATE TABLE GRADE_REPORT (
+	STUD_ID int FOREIGN KEY REFERENCES STUDENT(STUD_ID),
+	SEC_ID int FOREIGN KEY REFERENCES SECTION(SEC_ID),
+	GRADE char(1)
+);
+CREATE TABLE PREREQU (
+	C_NUM varchar(50),
+	PRE_NUM varchar(50)
+);

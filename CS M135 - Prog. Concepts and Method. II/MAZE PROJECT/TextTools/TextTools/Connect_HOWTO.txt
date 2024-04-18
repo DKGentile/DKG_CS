@@ -1,0 +1,16 @@
+#include<windows.h>
+#include<iostream>
+#include "Connect.h"
+
+using namespace std;
+
+int main()
+{
+    Connect c;
+    c.Link(30, 30, 40, 40);
+    c.Link(30, 30, 40, 10);
+    c.Link(30, 30, 10, 10);
+    c.Link(30, 30, 10, 50);
+
+    return 0;
+}

@@ -1,0 +1,5 @@
+SELECT * FROM Customers;
+SELECT ProductID, ProductName, UnitPrice FROM Products WHERE UnitPrice < 20;
+SELECT OrderID, CustomerID FROM Orders WHERE OrderDate BETWEEN '2001/01/01' AND '2001/12/01 23:59:59.999'; --No entries past 1998
+SELECT SupplierID, CompanyName FROM Suppliers WHERE City <> 'London' and City <> 'New York' and City <> 'Paris';
+SELECT SupplierID, City FROM Suppliers WHERE City LIKE 'N%';

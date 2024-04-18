@@ -1,0 +1,56 @@
+#include "MyGraph.h"
+
+void main()
+{
+	/*MyGraph M("c:\\temp\\input.txt");
+
+	M.DrawGraph();*/
+
+
+	int arr[5][5] = { {0,7,6,0,3},
+					 {7,0,2,5,1},
+					 {6,2,0,8,0},
+					 {0,5,8,0,4},
+					 {3,1,0,4,0} };
+	MyGraph M(arr);
+
+	M.DrawGraph();
+
+
+	///////TEXT LOOP////////
+	int textsize = 54;
+	int color = 62;
+	int counter = 0;
+
+	Sleep(1000);
+
+	while (true)
+	{
+		Sleep(100);
+		if (counter < 56)
+		{
+			M.moveText_Right(counter + 116, textsize, color); // simulate moving text
+
+			M.startText_Left(counter + 61, textsize, color);
+
+			textsize--;
+		}
+		if (counter > 56)
+		{
+			color--;
+			Sleep(600);
+			textsize = 53;
+			counter = 0;
+			if (color == 2)
+			{
+				color = 62;
+			}
+		}
+		counter++;
+	};
+	/////////////////////////
+
+
+
+}
+

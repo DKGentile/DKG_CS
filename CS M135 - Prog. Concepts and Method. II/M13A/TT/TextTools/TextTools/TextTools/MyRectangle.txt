@@ -1,0 +1,18 @@
+
+// Example on how to use this class
+////	MyRectangle Manager(5, 5, 10, 20, char(219), true, 10, 11, "");
+////	Manager.Draw();
+// 
+//	MyRectangle Box0(6, 6, 10, 8, char(219), true, 14, 11, "-1");
+//	//Box0.Draw();
+//	Box0.DrawPath("R10D05L02U08R12");
+//	Box0.Impolode()
+
+//MyRectangle R(10, 10, 16, 10, char(219), true, 14, 10, "Loay");
+//R.Draw();
+//R.setSleepTime(100);
+//R.DrawPath("R10D5");
+//R.Impolode();
+
+	MyRectangle box;
+	box.DrawSkelaton(10, 10, 20, 10, "Loay",14);

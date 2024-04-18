@@ -1,0 +1,63 @@
+;nasm 2.13.02
+
+section .data
+    message:     db 'Identical',10 
+    messageLen:  equ $-message        
+
+    messageN:     db 'Not Identical',10 
+    messageNLen:  equ $-messageN      
+
+section .bss
+    val: resb 3
+    val2: resb 3
+
+section .text
+    global _start
+
+_start:
+
+    mov eax,3        
+    mov ebx,0 
+    mov ecx,val    
+    mov edx,3                       
+    int 80h           
+
+    mov eax,3        
+    mov ebx,0 
+    mov ecx,val2
+    mov edx,3                        
+    int 80h           
+
+    mov al,[val]
+    mov bl,[val2]
+    cmp al,bl
+    jnz nql
+    mov al,[val+1]
+    mov bl,[val2+1]
+    cmp al,bl
+    jnz nql
+    mov al,[val+2]
+    mov bl,[val2+2]
+    cmp al,bl
+    jnz nql
+
+
+    mov eax,4           
+    mov ebx,1 
+    mov ecx,message     
+    mov edx,messageLen   
+    int 80h                      
+    jmp end 
+
+nql:         
+    mov eax,4           
+    mov ebx,1 
+    mov ecx,messageN     
+    mov edx,messageNLen 
+    int 80h                        
+    jmp end 
+             
+end:
+    mov eax,1         
+    mov ebx,0         
+    int 80h;
