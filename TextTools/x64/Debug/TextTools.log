@@ -1,3 +1,0 @@
-﻿  Source.cpp
-C:\Users\demit\OneDrive\Desktop\TextTools\TextTools\Source.cpp(6,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
-  TextTools.vcxproj -> C:\Users\demit\OneDrive\Desktop\TextTools\x64\Debug\TextTools.exe
